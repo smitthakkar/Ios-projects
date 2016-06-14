@@ -1,2 +1,2 @@
-# Ios-projects
+# iOS-projects
 iOS apps made during my internship
