@@ -1,5 +1,5 @@
 # iOS-projects
-iOS apps made during my internship \n
+iOS apps made during my internship.
 All the screenshots have been uploaded in their respective folders.
 
 1.EmployeeStore
