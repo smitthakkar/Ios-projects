@@ -65,7 +65,8 @@ class ViewController: UIViewController {
               do{
                 json = try NSJSONSerialization.JSONObjectWithData(data, options:.AllowFragments) as? Dictionary
                 print(" Success :\(json)")
-                if let cod = json!["cod"]{
+                let cordd = json!["coord"]
+                if cordd == nil{
                     let alert = UIAlertController(title:"Alert!" ,message: "Could not fetch,try something else",preferredStyle: UIAlertControllerStyle.Alert);
                     let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
                         UIAlertAction in
