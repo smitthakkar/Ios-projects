@@ -57,7 +57,7 @@ class ViewController: UIViewController {
            
             let weather = WeatherForecast()
             finalJSON =   weather.getWeather(lat, lon: lon);
-            //print("Final Json Content :\(finalJSON)")
+            print("Final Json Content :\(finalJSON)")
             if finalJSON != "NO123"{
                let data: NSData = finalJSON!.dataUsingEncoding(NSUTF8StringEncoding)!
               
@@ -65,35 +65,41 @@ class ViewController: UIViewController {
               do{
                 json = try NSJSONSerialization.JSONObjectWithData(data, options:.AllowFragments) as? Dictionary
                 print(" Success :\(json)")
-                
-                let coord = json!["coord"];
-               /* let lati = coord!["lat"]
-                let longi = coord!["lon"]
-                print("\(lati!)");*/
-                if var tempFloat:Float! = coord!["lat"] as? Float{
-                    print("\(tempFloat)")
-                    ActualLat.text = "\(tempFloat!)";
+                if let cod = json!["cod"]{
+                    let alert = UIAlertController(title:"Alert!" ,message: "Could not fetch,try something else",preferredStyle: UIAlertControllerStyle.Alert);
+                    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
+                        UIAlertAction in
+                        NSLog("Cancel Pressed")
+                    }
+                    alert.addAction(cancelAction);
+                    self.presentViewController(alert, animated: true, completion: nil);
                 }
-                if var tempFloat2:Float! = coord!["lon"] as? Float{
-                    
-                    ActualLon.text = "\(tempFloat2!)";
-                }
-                
-                
-                
-             
-                
-                var Climate: String?;
-                let name = json!["name"];
-                
-                Climate = "\(name!)";
-                Place.text = Climate;
-                let stats1 = json!["weather"] as! Array<AnyObject>;
-                for item in stats1{
-                    let w = item["description"];
-                Climate = "\(w!!)"
-                }
-                 Weatherrepo.text = Climate
+                else{
+                    let coord = json!["coord"];
+               
+                    if var tempFloat:Float! = coord!["lat"] as? Float{
+                      print("\(tempFloat)")
+                       ActualLat.text = "\(tempFloat!)";
+                     }
+                    if var tempFloat2:Float! = coord!["lon"] as? Float{
+                       ActualLon.text = "\(tempFloat2!)";
+                    }
+                    var Climate: String?;
+                    let name = json!["name"]
+                    if name != nil{
+                       Climate = "\(name!)";
+                    }
+                   else {
+                      Climate = "" ;
+                    }
+                    Place.text = Climate;
+                    let stats1 = json!["weather"] as! Array<AnyObject>;
+                    for item in stats1{
+                       let w = item["description"];
+                       Climate = "\(w!!)"
+                     }
+                    Weatherrepo.text = Climate
+                     }
               }
              catch{
                 print(error)
@@ -104,6 +110,7 @@ class ViewController: UIViewController {
                 }
                 alert.addAction(cancelAction);                self.presentViewController(alert, animated: true, completion: nil);
                   }
+                
            }
             else{
                 let alert = UIAlertController(title:"Alert!" ,message: "Could not retrieve Json",preferredStyle: UIAlertControllerStyle.Alert);
