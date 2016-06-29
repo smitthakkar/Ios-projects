@@ -21,3 +21,7 @@ Once you select the image, it saves the selected image in a Photos directory in 
 It was my first assignment, to understand how different UI elements work, how to set backgrounds, buttons, views. 
 Its a guessing game to move the scroller disc close to the random number generated. The scores and rounds played are updated as you progress.
 
+4.WeatherForecast
+
+The app makes use of weather API and displays Place, Climate by taking longitude and lattitude values from the user. It is an example of JSON parsing and the cases like incorrect JSON , missing lattitude and longitude values and connection problems have been handled.
+
